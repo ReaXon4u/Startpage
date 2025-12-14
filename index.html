@@ -281,6 +281,9 @@
     .sugg:hover{background:rgba(255,255,255,0.08);color:var(--accent);transform:translateX(4px)}
 
     .footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:right}
+    .copyright-btn{background:transparent;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:all 0.2s ease;text-align:right;width:100%}
+    .copyright-btn:hover{color:var(--accent);background:rgba(255,255,255,0.05)}
+    .copyright-info{color:var(--muted);font-size:13px;text-align:right;margin-top:4px;animation:fadeIn 0.3s ease}
 
     .quick-links {
       display:flex;
@@ -952,7 +955,14 @@
         </div>
       </div>
     </div>
-    <div class="footer">© Copyright <strong>ReaXon</strong> 2025 • Version 1.16 Made With ❤️</div>
+    <div class="footer">
+      <button class="copyright-btn" id="copyrightBtn" aria-label="Show copyright information">
+        Dev Info
+      </button>
+      <div class="copyright-info" id="copyrightInfo" style="display: none;">
+       <strong>ReaXon</strong> • Version 2.1 • E For Efforts❤️
+      </div>
+    </div>
   </main>
 
   <script>
@@ -979,6 +989,14 @@
     const bookmarkModal = document.getElementById('bookmarkModal');
     const bookmarkForm = document.getElementById('bookmarkForm');
     const searchSuggestions = document.getElementById('searchSuggestions');
+    const copyrightBtn = document.getElementById('copyrightBtn');
+    const copyrightInfo = document.getElementById('copyrightInfo');
+    
+    // Copyright button toggle functionality
+    copyrightBtn.addEventListener('click', () => {
+      const isVisible = copyrightInfo.style.display !== 'none';
+      copyrightInfo.style.display = isVisible ? 'none' : 'block';
+    });
     
     // Suggestions collapse functionality
     let suggestionsCollapsed = true;
@@ -1641,9 +1659,7 @@
     });
 
 const sampleSuggestions = [
-  { text: 'Who Made This Engine?', url: 'https://github.com/reaxon4u' },
   'Cat Images',
-  'Reaxon engine tips and tricks',
   'Latest tech news',
   'Saturn images',
   'Best coffee near me',
