@@ -154,7 +154,7 @@
       to { transform: rotate(360deg); }
     }
 
-    .card{width: min(920px,94vw); padding:36px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px); box-shadow: 0 10px 30px rgba(2,6,23,0.6);transition:background 0.5s ease, box-shadow 0.5s ease;position:relative;z-index:1}
+    .card{width: min(920px,94vw); padding:36px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px); box-shadow: 0 10px 30px rgba(2,6,23,0.6);transition:background 0.5s ease, box-shadow 0.5s ease;position:relative;z-index:1;min-height: 200px}
 
     .brand{display:flex;gap:16px;align-items:center;margin-bottom:22px}
     .logo{width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(92,51,163,0.25), inset 0 -6px 18px rgba(255,255,255,0.06)}
@@ -163,12 +163,100 @@
     .title h1{margin:0;font-size:20px;letter-spacing:-0.2px}
     .title p{margin:0;color:var(--muted);font-size:13px}
 
-    .search-row{display:flex;gap:12px;align-items:center}
+    .search-row{display:flex;gap:12px;align-items:center;max-width: 800px;width: 100%;transition: max-width 0.3s ease}
+    .search-row.centered{max-width: 600px;margin: 0 auto}
     .search-input{flex:1;display:flex;align-items:center;background:var(--glass);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:border-color 0.3s ease, background 0.3s ease}
     .search-input:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(139,92,246,0.1)}
     .search-input input{flex:1;background:transparent;border:0;outline:none;color:inherit;font-size:16px;padding:6px}
     .icon-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;padding:8px;border-radius:10px;transition:color 0.2s ease, background 0.2s ease}
     .icon-btn:hover{color:var(--accent);background:rgba(255,255,255,0.05)}
+    
+    /* Search engine dropdown with icons */
+    .engine-selector {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .engine-select-btn {
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      min-width: 50px;
+      justify-content: center;
+    }
+    
+    .engine-select-btn:hover {
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .engine-select-btn img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+    
+    .engine-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 150px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      animation: fadeIn 0.2s ease;
+    }
+    
+    .engine-dropdown.show {
+      display: flex;
+    }
+    
+    .engine-option {
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s ease;
+    }
+    
+    .engine-option:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .engine-option.active {
+      background: rgba(139,92,246,0.1);
+    }
+    
+    .engine-option img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+    
+    .engine-option span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    
+    .engine-option:hover span,
+    .engine-option.active span {
+      color: var(--accent);
+    }
 
     .controls{display:flex;gap:10px;align-items:center;margin-top:14px}
     select{background:transparent;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);color:inherit;cursor:pointer;transition:border-color 0.2s ease}
@@ -180,7 +268,15 @@
     .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);transition:border-color 0.2s ease, background 0.2s ease, color 0.2s ease}
     .ghost:hover{background:rgba(255,255,255,0.05);border-color:var(--accent);color:var(--accent)}
 
-    .suggestions{margin-top:14px;background:transparent;border-radius:10px;padding:8px;display:grid;gap:6px}
+    .suggestions{margin-top:14px;background:transparent;border-radius:10px;padding:8px;display:grid;gap:6px;transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;overflow: hidden;opacity: 1}
+    
+    .suggestions.collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0;
+    }
     .sugg{padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted);font-size:14px;cursor:pointer;transition:background 0.2s ease, color 0.2s ease, transform 0.2s ease}
     .sugg:hover{background:rgba(255,255,255,0.08);color:var(--accent);transform:translateX(4px)}
 
@@ -194,6 +290,42 @@
       margin-top:20px;
       font-size:26px;
       position:relative;
+    }
+    
+    .quick-picks-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    
+    .quick-picks-toggle {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .quick-picks-toggle:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    
+    .search-row-wrapper {
+      transition: margin-top 0.3s ease;
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
     .quick-links a, .bookmark-item {
       text-decoration:none;
@@ -568,23 +700,28 @@
     }
 
 .theme-selector {
-  position: relative;
+  position: absolute;
+  top: 20px;
+  right: 20px;
   display: inline-block;
-  margin-top: 20px;
+  z-index: 100;
 }
 
 #themeBtn {
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   border: none;
   border-radius: 10px;
-  padding: 10px 18px;
+  padding: 10px;
   font-weight: 600;
   cursor: pointer;
   color: #021026;
   transition: transform 0.2s ease, filter 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
 }
 
 #themeBtn:hover {
@@ -595,8 +732,7 @@
 .theme-dropdown {
   position: absolute;
   top: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
+  right: 0;
   background: var(--card);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
@@ -616,8 +752,8 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .theme-option {
@@ -695,19 +831,35 @@
       </div>
     </div>
 
-    <div class="search-row">
-      <div class="search-input" role="search">
-        <input id="q" type="search" autocomplete="off" placeholder="Search the cosmos..." aria-label="Search query" />
-        <button class="icon-btn" id="clearBtn" title="Clear" aria-label="Clear search">✕</button>
-        <div class="search-suggestions" id="searchSuggestions"></div>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <select id="engineSelect" title="Choose search engine">
-          <option value="https://www.google.com/search?q=">Google</option>
-          <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
-          <option value="https://www.bing.com/search?q=">Bing</option>
-        </select>
-        <button class="btn" id="searchBtn">Search</button>
+    <div class="search-row-wrapper" id="searchRowWrapper">
+      <div class="search-row" id="searchRow">
+        <div class="search-input" role="search">
+          <input id="q" type="search" autocomplete="off" placeholder="Search the cosmos..." aria-label="Search query" />
+          <button class="icon-btn" id="clearBtn" title="Clear" aria-label="Clear search">✕</button>
+          <div class="search-suggestions" id="searchSuggestions"></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="engine-selector">
+            <button class="engine-select-btn" id="engineSelectBtn" title="Choose search engine" aria-label="Choose search engine">
+              <img id="engineIcon" src="https://www.google.com/s2/favicons?sz=64&domain=google.com" alt="Search engine icon" />
+            </button>
+            <div class="engine-dropdown" id="engineDropdown">
+              <div class="engine-option active" data-engine="https://www.google.com/search?q=" data-icon="https://www.google.com/s2/favicons?sz=64&domain=google.com">
+                <img src="https://www.google.com/s2/favicons?sz=64&domain=google.com" alt="Google" />
+                <span>Google</span>
+              </div>
+              <div class="engine-option" data-engine="https://duckduckgo.com/?q=" data-icon="https://www.google.com/s2/favicons?sz=64&domain=duckduckgo.com">
+                <img src="https://www.google.com/s2/favicons?sz=64&domain=duckduckgo.com" alt="DuckDuckGo" />
+                <span>DuckDuckGo</span>
+              </div>
+              <div class="engine-option" data-engine="https://www.bing.com/search?q=" data-icon="https://www.google.com/s2/favicons?sz=64&domain=bing.com">
+                <img src="https://www.google.com/s2/favicons?sz=64&domain=bing.com" alt="Bing" />
+                <span>Bing</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn" id="searchBtn">Search</button>
+        </div>
       </div>
     </div>
 
@@ -752,7 +904,14 @@
       </div>
     </div>
 
-    <div class="suggestions" id="suggestions" aria-hidden></div>
+    <div class="quick-picks-header">
+      <button class="quick-picks-toggle" id="quickPicksToggle">
+        <span id="quickPicksToggleIcon">▶</span>
+        <span>Suggested quick picks</span>
+      </button>
+    </div>
+
+    <div class="suggestions collapsed" id="suggestions" aria-hidden></div>
     
     <div class="search-history" id="searchHistory">
       <div class="history-title">
@@ -762,9 +921,9 @@
       <div id="historyList"></div>
     </div>
     
-    <div class="theme-selector" style="text-align:center;">
+    <div class="theme-selector">
       <button class="btn" id="themeBtn" aria-label="Change theme" aria-expanded="false">
-        <span>🎨</span> <span>Change Theme</span>
+        <span>🎨</span>
       </button>
       <div class="theme-dropdown" id="themeDropdown" role="menu" aria-label="Theme options">
         <div class="theme-option active" data-theme="dark" role="menuitem" aria-label="Dark theme" style="background: linear-gradient(135deg, #0f1724, #1e293b);">
@@ -792,8 +951,9 @@
           <span class="theme-label">Forest</span>
         </div>
       </div>
-      <div class="keyboard-hint">Press <kbd>Ctrl+K</kbd> to focus search • <kbd>T</kbd> for themes</div>
     </div>
+    
+    <div class="keyboard-hint" style="text-align:center;margin-top:10px;font-size:11px;color:var(--muted)">Press <kbd>Ctrl+K</kbd> to focus search • <kbd>T</kbd> for themes</div>
     
     <div class="footer">© Copyright <strong>ReaXon</strong> 2025 • Version 1.16 Made With ❤️</div>
   </main>
@@ -802,7 +962,11 @@
     // Initialize elements
     const q = document.getElementById('q');
     const searchBtn = document.getElementById('searchBtn');
-    const engineSelect = document.getElementById('engineSelect');
+    const engineSelectBtn = document.getElementById('engineSelectBtn');
+    const engineDropdown = document.getElementById('engineDropdown');
+    const engineIcon = document.getElementById('engineIcon');
+    const engineOptions = document.querySelectorAll('.engine-option');
+    let currentEngine = 'https://www.google.com/search?q=';
     const suggestionsEl = document.getElementById('suggestions');
     const clearBtn = document.getElementById('clearBtn');
     const luckyBtn = document.getElementById('luckyBtn');
@@ -812,9 +976,93 @@
     const beybladeOverlay = document.getElementById('beybladeOverlay');
     const easterEggPopup = document.getElementById('easterEggPopup');
     const quickLinks = document.getElementById('quickLinks');
+    const quickPicksToggle = document.getElementById('quickPicksToggle');
+    const quickPicksToggleIcon = document.getElementById('quickPicksToggleIcon');
+    const searchRow = document.getElementById('searchRow');
     const bookmarkModal = document.getElementById('bookmarkModal');
     const bookmarkForm = document.getElementById('bookmarkForm');
     const searchSuggestions = document.getElementById('searchSuggestions');
+    
+    // Suggestions collapse functionality
+    let suggestionsCollapsed = true;
+    
+    // Load saved state
+    const savedCollapsedState = localStorage.getItem('reaxon-suggestions-collapsed');
+    if (savedCollapsedState !== null) {
+      suggestionsCollapsed = savedCollapsedState === 'true';
+    }
+    
+    function updateSuggestionsState() {
+      if (suggestionsCollapsed) {
+        suggestionsEl.classList.add('collapsed');
+        quickPicksToggleIcon.textContent = '▶';
+        searchRow.classList.add('centered');
+      } else {
+        suggestionsEl.classList.remove('collapsed');
+        quickPicksToggleIcon.textContent = '▼';
+        searchRow.classList.remove('centered');
+        // Set max-height to actual content height
+        const height = suggestionsEl.scrollHeight;
+        suggestionsEl.style.maxHeight = height + 'px';
+      }
+      localStorage.setItem('reaxon-suggestions-collapsed', suggestionsCollapsed.toString());
+    }
+    
+    quickPicksToggle.addEventListener('click', () => {
+      suggestionsCollapsed = !suggestionsCollapsed;
+      updateSuggestionsState();
+    });
+    
+    // Initialize state
+    updateSuggestionsState();
+    
+    // Search engine selector with icons
+    engineSelectBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      engineDropdown.classList.toggle('show');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!engineSelectBtn.contains(e.target) && !engineDropdown.contains(e.target)) {
+        engineDropdown.classList.remove('show');
+      }
+    });
+    
+    // Handle engine selection
+    engineOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const engine = option.dataset.engine;
+        const icon = option.dataset.icon;
+        currentEngine = engine;
+        engineIcon.src = icon;
+        
+        // Update active state
+        engineOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+        
+        engineDropdown.classList.remove('show');
+      });
+    });
+    
+    // Load saved engine preference
+    const savedEngine = localStorage.getItem('reaxon-search-engine');
+    if (savedEngine) {
+      const savedOption = Array.from(engineOptions).find(opt => opt.dataset.engine === savedEngine);
+      if (savedOption) {
+        savedOption.click();
+      }
+    } else {
+      // Default to Google
+      engineOptions[0].click();
+    }
+    
+    // Save engine preference when changed
+    engineOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        localStorage.setItem('reaxon-search-engine', currentEngine);
+      });
+    });
     
     // Search suggestions state
     let currentSuggestions = [];
@@ -1030,6 +1278,8 @@
     
     function renderBookmarks() {
       const bookmarks = getBookmarks();
+      // Remove all children except the add button if it exists
+      const addBtn = quickLinks.querySelector('.add-bookmark-btn');
       quickLinks.innerHTML = '';
       
       bookmarks.forEach((bookmark, index) => {
@@ -1089,15 +1339,15 @@
       });
       
       // Add + button
-      const addBtn = document.createElement('button');
-      addBtn.className = 'add-bookmark-btn';
-      addBtn.innerHTML = '+';
-      addBtn.title = 'Add bookmark';
-      addBtn.addEventListener('click', () => {
+      const newAddBtn = document.createElement('button');
+      newAddBtn.className = 'add-bookmark-btn';
+      newAddBtn.innerHTML = '+';
+      newAddBtn.title = 'Add bookmark';
+      newAddBtn.addEventListener('click', () => {
         bookmarkModal.classList.add('show');
         document.getElementById('bookmarkUrl').focus();
       });
-      quickLinks.appendChild(addBtn);
+      quickLinks.appendChild(newAddBtn);
     }
     
     function getDragAfterElement(container, x) {
@@ -1443,6 +1693,14 @@ function renderSuggestions(filter = '') {
   });
 
   suggestionsEl.style.display = list.length ? 'block' : 'none';
+  
+  // Update collapsed state after rendering - use setTimeout to ensure DOM is updated
+  setTimeout(() => {
+    if (!suggestionsCollapsed && list.length > 0) {
+      const height = suggestionsEl.scrollHeight;
+      suggestionsEl.style.maxHeight = height + 'px';
+    }
+  }, 0);
 }
     
     clearBtn.addEventListener('click', ()=>{ 
@@ -1476,7 +1734,7 @@ function doSearch(){
   // Add to search history
   addToHistory(query);
   
-  const base = engineSelect.value;
+  const base = currentEngine;
   const url = base + encodeURIComponent(query);
   
   // Add loading state
@@ -1498,7 +1756,7 @@ function doSearch(){
         return;
       }
       
-      const engine = engineSelect.value;
+      const engine = currentEngine;
       if(engine.includes('google')){
         const url = 'https://www.google.com/search?q=' + encodeURIComponent(query) + '&btnI=I';
         window.open(url, '_blank');
@@ -1517,18 +1775,10 @@ function doSearch(){
         }
         doSearch(); 
       }
-      if(e.key === 'ArrowUp' || e.key === 'ArrowDown'){ 
-        // Only handle engine selection if suggestions are not showing
-        if (!searchSuggestions.classList.contains('show')) {
-          const idx = engineSelect.selectedIndex; 
-          if(e.key === 'ArrowUp') engineSelect.selectedIndex = Math.max(0, idx-1); 
-          else engineSelect.selectedIndex = Math.min(engineSelect.options.length-1, idx+1); 
-        }
-      }
     });
 
-    document.getElementById('trendingBtn').addEventListener('click', ()=>{ const base = engineSelect.value; window.open(base + encodeURIComponent('trending news'), '_blank'); });
-    document.getElementById('imagesBtn').addEventListener('click', ()=>{ const qstr = 'beautiful wallpapers'; const engine = engineSelect.value; if(engine.includes('duckduckgo')) window.open('https://duckduckgo.com/?q=' + encodeURIComponent(qstr) + '&iax=images&ia=images','_blank'); else if(engine.includes('google')) window.open('https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(qstr),'_blank'); else window.open(engine + encodeURIComponent(qstr),'_blank'); });
+    document.getElementById('trendingBtn').addEventListener('click', ()=>{ const base = currentEngine; window.open(base + encodeURIComponent('trending news'), '_blank'); });
+    document.getElementById('imagesBtn').addEventListener('click', ()=>{ const qstr = 'beautiful wallpapers'; const engine = currentEngine; if(engine.includes('duckduckgo')) window.open('https://duckduckgo.com/?q=' + encodeURIComponent(qstr) + '&iax=images&ia=images','_blank'); else if(engine.includes('google')) window.open('https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(qstr),'_blank'); else window.open(engine + encodeURIComponent(qstr),'_blank'); });
 
     renderSuggestions();
     
