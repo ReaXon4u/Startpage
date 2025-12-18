@@ -107,6 +107,23 @@
             border: 1px solid rgba(220, 38, 38, 0.3);
         }
 
+        .top-right-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
         /* Easter Egg Pop-up Notification */
         .easter-egg-popup {
             position: fixed;
@@ -564,7 +581,7 @@
         .quick-picks-header {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 8px;
             margin-top: 20px;
             margin-bottom: 10px;
@@ -1052,11 +1069,8 @@
         }
 
         .theme-selector {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: relative;
             display: inline-block;
-            z-index: 100;
         }
 
         #themeBtn {
@@ -1193,42 +1207,19 @@
         </div>
 
         <div class="search-row-wrapper" id="searchRowWrapper">
-            <div class="search-row" id="searchRow">
+            <div class="search-row centered" id="searchRow">
                 <div class="search-input" role="search">
                     <input id="q" type="search" autocomplete="off" placeholder="Search the cosmos..."
                         aria-label="Search query" />
                     <button class="icon-btn" id="clearBtn" title="Clear" aria-label="Clear search">✕</button>
                     <div class="search-suggestions" id="searchSuggestions"></div>
                 </div>
-                <div style="display:flex;gap:8px;align-items:center">
-                    <div class="engine-selector">
-                        <button class="engine-select-btn" id="engineSelectBtn" title="Choose search engine"
-                            aria-label="Choose search engine">
-                            <img id="engineIcon" src="https://www.google.com/s2/favicons?sz=64&domain=google.com"
-                                alt="Search engine icon" />
-                        </button>
-                        <div class="engine-dropdown" id="engineDropdown">
-                            <div class="engine-option active" data-engine="https://www.google.com/search?q="
-                                data-icon="https://www.google.com/s2/favicons?sz=64&domain=google.com">
-                                <img src="https://www.google.com/s2/favicons?sz=64&domain=google.com" alt="Google" />
-                                <span>Google</span>
-                            </div>
-                            <div class="engine-option" data-engine="https://duckduckgo.com/?q="
-                                data-icon="https://www.google.com/s2/favicons?sz=64&domain=duckduckgo.com">
-                                <img src="https://www.google.com/s2/favicons?sz=64&domain=duckduckgo.com"
-                                    alt="DuckDuckGo" />
-                                <span>DuckDuckGo</span>
-                            </div>
-                            <div class="engine-option" data-engine="https://www.bing.com/search?q="
-                                data-icon="https://www.google.com/s2/favicons?sz=64&domain=bing.com">
-                                <img src="https://www.google.com/s2/favicons?sz=64&domain=bing.com" alt="Bing" />
-                                <span>Bing</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn" id="searchBtn">Search</button>
-                </div>
             </div>
+        </div>
+
+        <div class="search-actions">
+            <button class="btn" id="searchBtn">Search</button>
+            <button class="ghost btn" id="luckyBtn">I'm Feeling Lucky</button>
         </div>
 
         <div class="quick-links" id="quickLinks">
@@ -1258,15 +1249,12 @@
         </div>
 
         <div class="controls">
-            <div style="display:flex;gap:8px;align-items:center">
+            <div style="display:flex;gap:8px;align-items:center;width:100%">
                 <label style="color:var(--muted);font-size:13px">Quick picks</label>
                 <div style="display:flex;gap:6px">
                     <button class="ghost btn" id="trendingBtn">Trending</button>
                     <button class="ghost btn" id="imagesBtn">Images</button>
                 </div>
-            </div>
-            <div class="actions">
-                <button class="ghost btn" id="luckyBtn">I'm Feeling Lucky</button>
             </div>
         </div>
 
@@ -1287,42 +1275,71 @@
             <div id="historyList"></div>
         </div>
 
-        <div class="theme-selector">
-            <button class="btn" id="themeBtn" aria-label="Change theme" aria-expanded="false">
-                <span>🎨</span>
-            </button>
-            <div class="theme-dropdown" id="themeDropdown" role="menu" aria-label="Theme options">
-                <div class="theme-option active" data-theme="dark" role="menuitem" aria-label="Dark theme"
-                    style="background: linear-gradient(135deg, #0f1724, #1e293b);">
-                    <span class="theme-label">Dark</span>
+        <div class="top-right-actions">
+            <!-- Search Engine Selector -->
+            <div class="engine-selector">
+                <button class="engine-select-btn" id="engineSelectBtn" title="Choose search engine"
+                    aria-label="Choose search engine">
+                    <img id="engineIcon" src="https://www.google.com/s2/favicons?sz=64&domain=google.com"
+                        alt="Search engine icon" />
+                </button>
+                <div class="engine-dropdown" id="engineDropdown">
+                    <div class="engine-option active" data-engine="https://www.google.com/search?q="
+                        data-icon="https://www.google.com/s2/favicons?sz=64&domain=google.com">
+                        <img src="https://www.google.com/s2/favicons?sz=64&domain=google.com" alt="Google" />
+                        <span>Google</span>
+                    </div>
+                    <div class="engine-option" data-engine="https://duckduckgo.com/?q="
+                        data-icon="https://www.google.com/s2/favicons?sz=64&domain=duckduckgo.com">
+                        <img src="https://www.google.com/s2/favicons?sz=64&domain=duckduckgo.com" alt="DuckDuckGo" />
+                        <span>DuckDuckGo</span>
+                    </div>
+                    <div class="engine-option" data-engine="https://www.bing.com/search?q="
+                        data-icon="https://www.google.com/s2/favicons?sz=64&domain=bing.com">
+                        <img src="https://www.google.com/s2/favicons?sz=64&domain=bing.com" alt="Bing" />
+                        <span>Bing</span>
+                    </div>
                 </div>
-                <div class="theme-option" data-theme="light" role="menuitem" aria-label="Light theme"
-                    style="background: linear-gradient(135deg, #f7f8fa, #e5e7eb);">
-                    <span class="theme-label">Light</span>
-                </div>
-                <div class="theme-option" data-theme="blue" role="menuitem" aria-label="Blue theme"
-                    style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
-                    <span class="theme-label">Blue</span>
-                </div>
-                <div class="theme-option" data-theme="purple" role="menuitem" aria-label="Purple theme"
-                    style="background: linear-gradient(135deg, #6b21a8, #a855f7);">
-                    <span class="theme-label">Purple</span>
-                </div>
-                <div class="theme-option" data-theme="green" role="menuitem" aria-label="Green theme"
-                    style="background: linear-gradient(135deg, #166534, #22c55e);">
-                    <span class="theme-label">Green</span>
-                </div>
-                <div class="theme-option" data-theme="sunset" role="menuitem" aria-label="Sunset theme"
-                    style="background: linear-gradient(135deg, #ea580c, #f97316);">
-                    <span class="theme-label">Sunset</span>
-                </div>
-                <div class="theme-option" data-theme="ocean" role="menuitem" aria-label="Ocean theme"
-                    style="background: linear-gradient(135deg, #0c4a6e, #06b6d4);">
-                    <span class="theme-label">Ocean</span>
-                </div>
-                <div class="theme-option" data-theme="forest" role="menuitem" aria-label="Forest theme"
-                    style="background: linear-gradient(135deg, #14532d, #16a34a);">
-                    <span class="theme-label">Forest</span>
+            </div>
+
+            <!-- Theme Selector -->
+            <div class="theme-selector">
+                <button class="btn" id="themeBtn" aria-label="Change theme" aria-expanded="false">
+                    <span>🎨</span>
+                </button>
+                <div class="theme-dropdown" id="themeDropdown" role="menu" aria-label="Theme options">
+                    <div class="theme-option active" data-theme="dark" role="menuitem" aria-label="Dark theme"
+                        style="background: linear-gradient(135deg, #0f1724, #1e293b);">
+                        <span class="theme-label">Dark</span>
+                    </div>
+                    <div class="theme-option" data-theme="light" role="menuitem" aria-label="Light theme"
+                        style="background: linear-gradient(135deg, #f7f8fa, #e5e7eb);">
+                        <span class="theme-label">Light</span>
+                    </div>
+                    <div class="theme-option" data-theme="blue" role="menuitem" aria-label="Blue theme"
+                        style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
+                        <span class="theme-label">Blue</span>
+                    </div>
+                    <div class="theme-option" data-theme="purple" role="menuitem" aria-label="Purple theme"
+                        style="background: linear-gradient(135deg, #6b21a8, #a855f7);">
+                        <span class="theme-label">Purple</span>
+                    </div>
+                    <div class="theme-option" data-theme="green" role="menuitem" aria-label="Green theme"
+                        style="background: linear-gradient(135deg, #166534, #22c55e);">
+                        <span class="theme-label">Green</span>
+                    </div>
+                    <div class="theme-option" data-theme="sunset" role="menuitem" aria-label="Sunset theme"
+                        style="background: linear-gradient(135deg, #ea580c, #f97316);">
+                        <span class="theme-label">Sunset</span>
+                    </div>
+                    <div class="theme-option" data-theme="ocean" role="menuitem" aria-label="Ocean theme"
+                        style="background: linear-gradient(135deg, #0c4a6e, #06b6d4);">
+                        <span class="theme-label">Ocean</span>
+                    </div>
+                    <div class="theme-option" data-theme="forest" role="menuitem" aria-label="Forest theme"
+                        style="background: linear-gradient(135deg, #14532d, #16a34a);">
+                        <span class="theme-label">Forest</span>
+                    </div>
                 </div>
             </div>
         </div>
