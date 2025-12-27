@@ -54,58 +54,9 @@
             position: relative
         }
 
-        /* Beyblade background overlay with custom image */
-        .beyblade-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            overflow: hidden;
-            background-image: url('assets/Sh (1).jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            filter: brightness(0.7);
-        }
 
-        .beyblade-overlay.active {
-            opacity: 0.4;
-        }
 
-        body.beyblade-mode {
-            background: linear-gradient(135deg,
-                    rgba(127, 29, 29, 0.8) 0%,
-                    rgba(0, 0, 0, 0.9) 25%,
-                    rgba(185, 28, 28, 0.7) 50%,
-                    rgba(0, 0, 0, 0.95) 75%,
-                    rgba(127, 29, 29, 0.8) 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease infinite;
-        }
 
-        @keyframes gradientShift {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        body.beyblade-mode .card {
-            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.5),
-                0 0 80px rgba(185, 28, 28, 0.3),
-                inset 0 0 20px rgba(127, 29, 29, 0.2);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-        }
 
         .top-right-actions {
             position: absolute;
@@ -124,123 +75,9 @@
             width: 100%;
         }
 
-        /* Easter Egg Pop-up Notification */
-        .easter-egg-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.95), rgba(185, 28, 28, 0.95));
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 30px 40px;
-            color: #fff;
-            font-size: 24px;
-            font-weight: 700;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(220, 38, 38, 0.6),
-                inset 0 0 20px rgba(255, 255, 255, 0.1);
-            z-index: 10000;
-            opacity: 0;
-            pointer-events: none;
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-            user-select: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
 
-        .easter-egg-popup.show {
-            animation: popupShow 0.5s ease forwards, popupPulse 2s ease 0.5s infinite;
-            pointer-events: auto;
-        }
 
-        .easter-egg-popup:hover {
-            transform: translate(-50%, -50%) scale(1.05);
-        }
 
-        .easter-egg-popup.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        @keyframes popupShow {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
-            }
-
-            50% {
-                transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1) rotate(0deg);
-            }
-        }
-
-        @keyframes popupPulse {
-
-            0%,
-            100% {
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                    0 0 40px rgba(220, 38, 38, 0.6),
-                    inset 0 0 20px rgba(255, 255, 255, 0.1);
-            }
-
-            50% {
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                    0 0 60px rgba(220, 38, 38, 0.9),
-                    inset 0 0 30px rgba(255, 255, 255, 0.2);
-            }
-        }
-
-        .easter-egg-popup::before {
-            content: '🎯';
-            display: block;
-            font-size: 48px;
-            margin-bottom: 10px;
-            animation: spin 3s linear infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Toggle Button for Beyblade Mode */
-        .beyblade-toggle-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #b91c1c, #7f1d1d);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            z-index: 9999;
-            font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            animation: fadeIn 0.5s ease;
-            display: none;
-            /* Hidden by default */
-        }
-
-        .beyblade-toggle-btn:hover {
-            transform: translateX(-50%) scale(1.05);
-            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.6);
-            background: linear-gradient(135deg, #dc2626, #991b1b);
-        }
 
         .card {
             width: min(920px, 94vw);
@@ -1188,10 +1025,7 @@
 
 <body>
     <div class="particles" id="particles"></div>
-    <div class="beyblade-overlay" id="beybladeOverlay"></div>
-    <div class="easter-egg-popup" id="easterEggPopup">Beyblade Mode!</div>
-    <div class="easter-egg-popup" id="welcomeKatPopup">Welcome Kat</div>
-    <button id="beybladeToggle" class="beyblade-toggle-btn">Toggle Beyblade Mode</button>
+
 
     <main class="card">
         <div class="brand">
@@ -1316,10 +1150,6 @@
                         style="background: linear-gradient(135deg, #f7f8fa, #e5e7eb);">
                         <span class="theme-label">Light</span>
                     </div>
-                    <div class="theme-option" data-theme="blue" role="menuitem" aria-label="Blue theme"
-                        style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
-                        <span class="theme-label">Blue</span>
-                    </div>
                     <div class="theme-option" data-theme="purple" role="menuitem" aria-label="Purple theme"
                         style="background: linear-gradient(135deg, #6b21a8, #a855f7);">
                         <span class="theme-label">Purple</span>
@@ -1332,13 +1162,21 @@
                         style="background: linear-gradient(135deg, #ea580c, #f97316);">
                         <span class="theme-label">Sunset</span>
                     </div>
-                    <div class="theme-option" data-theme="ocean" role="menuitem" aria-label="Ocean theme"
-                        style="background: linear-gradient(135deg, #0c4a6e, #06b6d4);">
-                        <span class="theme-label">Ocean</span>
+                    <div class="theme-option" data-theme="red" role="menuitem" aria-label="Red theme"
+                        style="background: linear-gradient(135deg, #991b1b, #dc2626);">
+                        <span class="theme-label">Red</span>
                     </div>
-                    <div class="theme-option" data-theme="forest" role="menuitem" aria-label="Forest theme"
-                        style="background: linear-gradient(135deg, #14532d, #16a34a);">
-                        <span class="theme-label">Forest</span>
+                    <div class="theme-option" data-theme="brown" role="menuitem" aria-label="Brown theme"
+                        style="background: linear-gradient(135deg, #451a03, #92400e);">
+                        <span class="theme-label">Brown</span>
+                    </div>
+                    <div class="theme-option" data-theme="pink" role="menuitem" aria-label="Pink theme"
+                        style="background: linear-gradient(135deg, #831843, #db2777);">
+                        <span class="theme-label">Pink</span>
+                    </div>
+                    <div class="theme-option" data-theme="midnight" role="menuitem" aria-label="Midnight theme"
+                        style="background: linear-gradient(135deg, #020617, #1e293b);">
+                        <span class="theme-label">Midnight</span>
                     </div>
                 </div>
             </div>
@@ -1368,19 +1206,7 @@
         const searchHistory = document.getElementById('searchHistory');
         const historyList = document.getElementById('historyList');
         const clearHistoryBtn = document.getElementById('clearHistory');
-        const beybladeOverlay = document.getElementById('beybladeOverlay');
-        const easterEggPopup = document.getElementById('easterEggPopup');
-        const quickLinks = document.getElementById('quickLinks');
-        const quickPicksToggle = document.getElementById('quickPicksToggle');
-        const quickPicksToggleIcon = document.getElementById('quickPicksToggleIcon');
-        const searchRow = document.getElementById('searchRow');
-        const bookmarkModal = document.getElementById('bookmarkModal');
-        const bookmarkForm = document.getElementById('bookmarkForm');
-        const searchSuggestions = document.getElementById('searchSuggestions');
-        const copyrightBtn = document.getElementById('copyrightBtn');
-        const copyrightInfo = document.getElementById('copyrightInfo');
-        const welcomeKatPopup = document.getElementById('welcomeKatPopup');
-        const beybladeToggle = document.getElementById('beybladeToggle');
+
 
         // Copyright button toggle functionality
         copyrightBtn.addEventListener('click', () => {
@@ -1474,138 +1300,9 @@
         let selectedSuggestionIndex = -1;
         let suggestionTimeout = null;
 
-        // Track previous theme for beyblade easter egg
-        let previousTheme = localStorage.getItem('reaxon-theme') || 'dark';
-        let isBeybladeMode = false;
-        let popupShown = false;
 
-        // Beyblade mode functions
-        function activateBeybladeMode() {
-            if (isBeybladeMode) return;
 
-            // Save current theme
-            previousTheme = localStorage.getItem('reaxon-theme') || 'dark';
 
-            // Apply beyblade theme
-            applyTheme('beyblade');
-
-            // Activate beyblade overlay and body class
-            beybladeOverlay.classList.add('active');
-            document.body.classList.add('beyblade-mode');
-
-            // Change title
-            const titleEl = document.querySelector('.title h1');
-            if (titleEl) titleEl.textContent = 'BeySearch';
-
-            // Change tagline
-            const taglineEl = document.querySelector('.title p');
-            if (taglineEl) taglineEl.textContent = 'Beyblade Beyblade Let it rip!';
-
-            // Change search button text
-            if (searchBtn) searchBtn.textContent = 'LET IT RIP';
-
-            // Change search input placeholder
-            if (q) q.placeholder = 'Search your Beyblades.';
-
-            // Change suggestions
-            sampleSuggestions = [...beybladeSuggestions];
-            renderSuggestions();
-
-            // Change Logo
-            const logoImg = document.querySelector('.logo-img');
-            if (logoImg) logoImg.src = 'assets/Main2.jpg';
-
-            // Randomize Background
-            const randomNum = Math.floor(Math.random() * 4) + 1;
-            beybladeOverlay.style.backgroundImage = `url('assets/Sh (${randomNum}).jpg')`;
-
-            // Show Toggle Button
-            if (beybladeToggle) {
-                beybladeToggle.style.display = 'block';
-                beybladeToggle.textContent = 'Disable Beyblade Mode';
-            }
-
-            // Show popup message (only once per session)
-            if (!popupShown) {
-                setTimeout(() => {
-                    easterEggPopup.classList.add('show');
-                    popupShown = true;
-
-                    // Auto-hide popup after 4 seconds
-                    setTimeout(() => {
-                        easterEggPopup.classList.remove('show');
-                    }, 4000);
-
-                    // Show Welcome Kat popup after Beyblade popup fades
-                    setTimeout(() => {
-                        if (welcomeKatPopup) {
-                            welcomeKatPopup.classList.add('show');
-                            setTimeout(() => {
-                                welcomeKatPopup.classList.remove('show');
-                            }, 4000);
-                        }
-                    }, 4500); // 4000ms + 500ms delay
-
-                }, 300);
-            }
-
-            isBeybladeMode = true;
-        }
-
-        function deactivateBeybladeMode() {
-            if (!isBeybladeMode) return;
-
-            // Revert to previous theme
-            applyTheme(previousTheme);
-
-            // Remove beyblade overlay and body class
-            beybladeOverlay.classList.remove('active');
-            document.body.classList.remove('beyblade-mode');
-
-            // Revert title
-            const titleEl = document.querySelector('.title h1');
-            if (titleEl) titleEl.textContent = 'ReaSearch';
-
-            // Revert tagline
-            const taglineEl = document.querySelector('.title p');
-            if (taglineEl) taglineEl.textContent = 'Fast, Private & Secure! ReaSearch IT!';
-
-            // Revert search button text
-            if (searchBtn) searchBtn.textContent = 'Search';
-
-            // Revert search input placeholder
-            if (q) q.placeholder = 'Search the cosmos...';
-
-            // Revert suggestions
-            sampleSuggestions = [...defaultSuggestions];
-            renderSuggestions();
-
-            // Revert Logo
-            const logoImg = document.querySelector('.logo-img');
-            if (logoImg) logoImg.src = 'assets/Main1.png';
-
-            // Update toggle button text if visible
-            if (beybladeToggle) {
-                beybladeToggle.textContent = 'Enable Beyblade Mode';
-            }
-
-            // Hide popup if visible
-            easterEggPopup.classList.remove('show');
-            if (welcomeKatPopup) welcomeKatPopup.classList.remove('show');
-
-            isBeybladeMode = false;
-        }
-
-        // Toggle button event listener
-        if (beybladeToggle) {
-            beybladeToggle.addEventListener('click', () => {
-                if (isBeybladeMode) {
-                    deactivateBeybladeMode();
-                } else {
-                    activateBeybladeMode();
-                }
-            });
-        }
 
         // Time-based greeting
         function updateGreeting() {
@@ -2089,12 +1786,7 @@
                 fetchSearchSuggestions(e.target.value);
             }, 300);
 
-            // Check for beyblade easter egg
-            if (query === 'purplekat26d21') {
-                activateBeybladeMode();
-            } else if (isBeybladeMode && query !== 'purplekat26d21') {
-                deactivateBeybladeMode();
-            }
+
 
             // Reset button state
             searchBtn.innerHTML = 'Search';
@@ -2138,15 +1830,7 @@
             'Coding projects for beginners'
         ];
 
-        const beybladeSuggestions = [
-            'Shu Kurenai age',
-            'Shu Kurenai height',
-            'Shu Kurenai Beyblade model',
-            'Spryzen Requiem images',
-            'World Spriggan stats',
-            'Shu Kurenai battles',
-            'Beyblade Burst characters'
-        ];
+
 
         let sampleSuggestions = [...defaultSuggestions];
 
@@ -2207,26 +1891,14 @@
             searchHistory.classList.remove('show');
             searchSuggestions.classList.remove('show');
 
-            // Revert beyblade mode if active
-            if (isBeybladeMode) {
-                deactivateBeybladeMode();
-            }
+
         });
 
         function doSearch() {
             const query = q.value.trim();
             if (!query) return;
 
-            // 🐱 Easter Egg: Purplekat26d21
-            if (query.toLowerCase() === 'purplekat26d21') {
-                // Ensure beyblade mode is active before redirecting
-                activateBeybladeMode();
-                // Small delay to show the theme change
-                setTimeout(() => {
-                    window.location.href = 'https://x.com/thebladerever/status/1914306232443363772';
-                }, 300);
-                return;
-            }
+
 
             // Add to search history
             addToHistory(query);
@@ -2247,11 +1919,7 @@
         function doLucky() {
             const query = q.value.trim() || sampleSuggestions[Math.floor(Math.random() * sampleSuggestions.length)];
 
-            // 🐱 Easter Egg: Purplekat26d21
-            if (query.toLowerCase() === 'purplekat26d21') {
-                window.open('https://x.com/thebladerever/status/1914306232443363772', '_blank');
-                return;
-            }
+
 
             const engine = currentEngine;
             if (engine.includes('google')) {
@@ -2279,10 +1947,7 @@
 
         renderSuggestions();
 
-        // Close popup when clicked
-        easterEggPopup.addEventListener('click', () => {
-            easterEggPopup.classList.remove('show');
-        });
+
 
         // Theme system with multiple themes
         const themes = {
@@ -2305,16 +1970,6 @@
                 glass: 'rgba(0,0,0,0.04)',
                 bodyBg: 'linear-gradient(180deg,#e5eeff 0%, #c9e4ff 100%)',
                 textColor: '#111827'
-            },
-            blue: {
-                bg: '#0c1220',
-                card: '#1e293b',
-                accent: '#3b82f6',
-                accent2: '#60a5fa',
-                muted: '#94a3b8',
-                glass: 'rgba(59,130,246,0.1)',
-                bodyBg: 'radial-gradient(1200px 600px at 10% 10%, rgba(59,130,246,0.15), transparent), linear-gradient(180deg,#0c1220 0%, #1e3a8a 100%)',
-                textColor: '#e0e7ff'
             },
             purple: {
                 bg: '#1a0b2e',
@@ -2346,36 +2001,47 @@
                 bodyBg: 'radial-gradient(1200px 600px at 10% 10%, rgba(249,115,22,0.15), transparent), linear-gradient(180deg,#2a0f0a 0%, #ea580c 100%)',
                 textColor: '#fff7ed'
             },
-            ocean: {
-                bg: '#0c1220',
-                card: '#1e293b',
-                accent: '#06b6d4',
-                accent2: '#22d3ee',
-                muted: '#67e8f9',
-                glass: 'rgba(6,182,212,0.1)',
-                bodyBg: 'radial-gradient(1200px 600px at 10% 10%, rgba(6,182,212,0.15), transparent), linear-gradient(180deg,#0c1220 0%, #0c4a6e 100%)',
-                textColor: '#cffafe'
-            },
-            forest: {
-                bg: '#0a1f0a',
-                card: '#1a2e1a',
-                accent: '#16a34a',
-                accent2: '#4ade80',
-                muted: '#86efac',
-                glass: 'rgba(22,163,74,0.1)',
-                bodyBg: 'radial-gradient(1200px 600px at 10% 10%, rgba(22,163,74,0.15), transparent), linear-gradient(180deg,#0a1f0a 0%, #14532d 100%)',
-                textColor: '#dcfce7'
-            },
-            beyblade: {
-                bg: '#1a0000',
-                card: '#2d0a0a',
+            red: {
+                bg: '#180404',
+                card: '#290606',
                 accent: '#dc2626',
-                accent2: '#b91c1c',
+                accent2: '#ef4444',
                 muted: '#fca5a5',
-                glass: 'rgba(220, 38, 38, 0.15)',
-                bodyBg: 'linear-gradient(135deg, rgba(127, 29, 29, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%)',
-                textColor: '#fee2e2'
+                glass: 'rgba(220, 38, 38, 0.1)',
+                bodyBg: 'radial-gradient(1200px 600px at 10% 10%, rgba(220, 38, 38, 0.15), transparent), linear-gradient(180deg,#180404 0%, #450a0a 100%)',
+                textColor: '#fef2f2'
+            },
+            brown: {
+                bg: '#1c100b',
+                card: '#2d1810',
+                accent: '#d97706',
+                accent2: '#f59e0b',
+                muted: '#fdba74',
+                glass: 'rgba(217, 119, 6, 0.1)',
+                bodyBg: 'radial-gradient(1200px 600px at 10% 10%, rgba(217, 119, 6, 0.15), transparent), linear-gradient(180deg,#1c100b 0%, #451a03 100%)',
+                textColor: '#fffbeb'
+            },
+            pink: {
+                bg: '#1a050f',
+                card: '#2e0a1a',
+                accent: '#db2777',
+                accent2: '#f472b6',
+                muted: '#fbcfe8',
+                glass: 'rgba(219, 39, 119, 0.1)',
+                bodyBg: 'radial-gradient(1200px 600px at 10% 10%, rgba(219, 39, 119, 0.15), transparent), linear-gradient(180deg,#1a050f 0%, #500724 100%)',
+                textColor: '#fce7f3'
+            },
+            midnight: {
+                bg: '#020617',
+                card: '#0f172a',
+                accent: '#6366f1',
+                accent2: '#818cf8',
+                muted: '#cbd5e1',
+                glass: 'rgba(99, 102, 241, 0.1)',
+                bodyBg: 'radial-gradient(1200px 600px at 10% 10%, rgba(99, 102, 241, 0.15), transparent), linear-gradient(180deg,#020617 0%, #1e293b 100%)',
+                textColor: '#f8fafc'
             }
+
         };
 
         function applyTheme(themeName) {
